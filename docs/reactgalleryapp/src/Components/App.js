@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import apiKey from '../config.js'
+// import apiKey from '../config.js'
 import axios from 'axios';
 import {
   BrowserRouter,
@@ -13,7 +13,10 @@ import Nav from './Nav';
 import NotFound from './NotFound';
 import Photo from './Photo';
 
-const key = apiKey;
+// const key = apiKey;
+// const requestCats = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=cats&per_page=24&format=json&nojsoncallback=1`)
+// const requestDogs = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=dogs&per_page=24&format=json&nojsoncallback=1`)
+// const requestComputers = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=computers&per_page=24&format=json&nojsoncallback=1`)
 
 export default class App extends Component {
   constructor() {
@@ -26,28 +29,48 @@ export default class App extends Component {
     }
   }
 
-  mountData() {
-    this.setState(
-      {
-        photos: [this.performSearch('cats')],
-        cats: [this.performSearch('cats')],
-        dogs: [this.performSearch('dogs')],
-        computers: [this.performSearch('computers')]
-      }
-    )
-  }
+  // dataCall = () => {
+  //   axios.all([requestCats, requestDogs, requestComputers]).then(axios.spread((...responses) => {
+  //     const requestCats = responses[0]
+  //     const requestDogs = responses[1]
+  //     const requestComputers = responses[2]
+  //   })).catch(err => {
+  //     console.log('Error fetching and parsing data', err)
+  //   })
+  // }
 
-  performSearch = (query, state) => {
+  // mountData = () => {
+  //   this.setState(
+  //     {
+  //       photos: this.performSearch('cats'),
+  //       cats: this.performSearch('cats'),
+  //       dogs: this.performSearch('dogs'),
+  //       computers: this.performSearch('computers')
+  //     }
+  //   )
+  // }
+
+  performSearch = (query) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
-        this.setState({
-          state: response.data.photos.photo
-        })
+        return response.data.photos.photo
       })
       .catch(error => {
         console.log('Error fetching and parsing data', error)
       })
   }
+
+  // performSearch = (query, state) => {
+  //   axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+  //     .then(response => {
+  //       this.setState({
+  //         photos: response.data.photos.photo
+  //       })
+  //     })
+  //     .catch(error => {
+  //       console.log('Error fetching and parsing data', error)
+  //     })
+  // }
 
   performSearchCats = (query) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=$cats&per_page=24&format=json&nojsoncallback=1`)
@@ -68,12 +91,10 @@ export default class App extends Component {
   }
 
   render() {
-    this.performSearch()
-    this.performSearchCats()
-    console.log(this.state)
+    // // this.dataCall()
+    // // this.mountData()
+    // console.log('works')
 
-
-    console.log(this.state)
     return (
       <BrowserRouter>
         <div className="container">
@@ -90,7 +111,7 @@ export default class App extends Component {
           <div>
             <nav className="main-nav">
               <ul>
-                <li><NavLink to={"/cats"}>Cats</NavLink></li>
+                <li><NavLink to={"/cats"}>Catsss</NavLink></li>
                 <li><NavLink to={"/dogs"}>Dogs</NavLink></li>
                 <li><NavLink to={"/computers"}>Computers</NavLink></li>
               </ul>
