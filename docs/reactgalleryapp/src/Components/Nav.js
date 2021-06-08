@@ -1,26 +1,22 @@
-import React, { Component } from 'react';
-import { Route, NavLink, Redirect } from 'react-router-dom';
-import Photo from './Photo'
+import React from 'react';
+import { Route, NavLink } from 'react-router-dom';
 
-export default class Nav extends Component {
-  constructor() {
-    super();
+import SearchForm from './SearchForm'
 
-  }
+const Nav = ({ match }) => (
+  <div>
+    <nav className="main-nav">
+      <ul>
+        <li><NavLink to='/cats'>Cats</NavLink></li>
+        <li><NavLink to='/dogs'>Dogs</NavLink></li>
+        <li><NavLink to='/computers'>Computers</NavLink></li>
+      </ul>
+    </nav>
+    
+    {/* <Route exact path="/:name" render={ () => <Photo data={this.state.photos} />}/> */}
+  </div>
 
-  componentDidMount() {
-    this.setState({
-      cats: this.props.onSearch('cats'),
-      dogs: this.props.onSearch('dogs'),
-      computers: this.props.onSearch('computers')
-    })
-  }
   
+)
 
-  render () {
-    console.log(this.props)
-    return (
-      <Photo data={this.props.data}/>
-    )
-  }
-}
+export default Nav;
