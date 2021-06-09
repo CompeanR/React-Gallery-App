@@ -1,8 +1,7 @@
 import React from 'react';
 import { NavLink }from 'react-router-dom';
 
-
-
+//Component to navigate between 3 default topics.
 const Nav = (props) => (
   <div>
     <nav className="main-nav">

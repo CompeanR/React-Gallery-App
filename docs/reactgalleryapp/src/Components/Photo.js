@@ -1,7 +1,8 @@
 import React from 'react';
-import PhotoContainer from './photoContainer'
-import NotFound from './NotFound'
+import PhotoContainer from './photoContainer';
+import NotFound from './NotFound';
 
+//Component to display the photos.
 const Photo = (props) => {
 
   const results = props.data;
@@ -14,8 +15,8 @@ const Photo = (props) => {
                                           key={photo.id} />
     );
   } else {
-    photos = <NotFound />
-  }
+    photos = <NotFound />;
+  };
 
   return (
     <div className="photo-container">
@@ -24,7 +25,7 @@ const Photo = (props) => {
         {photos}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Photo
+export default Photo;

@@ -1,19 +1,18 @@
 import React from 'react';
-import { useHistory, Route } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import Nav from './Nav';
 
-import Photo from './Photo'
-import Nav from './Nav'
-
+//Component to push to the history the search request.
 const SearchForm = (props) => {
     let query;
     let history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.submit(query.value)
-        history.push(`/search/${query.value}`)
+        props.submit(query.value);
+        history.push(`/search/${query.value}`);
         e.currentTarget.reset();
-    }
+    };
     return (
         <div className="container">
         <form className="search-form" onSubmit={handleSubmit}>
@@ -28,7 +27,7 @@ const SearchForm = (props) => {
         <Nav />
 
     </div>
-    )
-}
+    );
+}; 
 
 export default SearchForm;

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import apiKey from '../config.js'
+import apiKey from '../config.js';
 import axios from 'axios';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 
-//App components'
-
+//App components
 import Photo from './Photo';
-import Error from './Error'
-import SearchForm from './SearchForm'
+import Error from './Error';
+import SearchForm from './SearchForm';
 
+//The api key and the API requests
 const key = apiKey;
-let requestCats = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=cats&per_page=24&format=json&nojsoncallback=1`)
-let requestDogs = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=dogs&per_page=24&format=json&nojsoncallback=1`)
-let requestComputers = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=computers&per_page=24&format=json&nojsoncallback=1`)
+let requestCats = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=cats&per_page=24&format=json&nojsoncallback=1`);
+let requestDogs = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=dogs&per_page=24&format=json&nojsoncallback=1`);
+let requestComputers = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=computers&per_page=24&format=json&nojsoncallback=1`);
 
 export default class App extends Component {
   constructor() {
@@ -23,14 +23,16 @@ export default class App extends Component {
       dogs: [],
       computers: [],
       loading: true
-    }
-  }
-
+    };
+  };
+  
+  //Function to mount the API request data.
   componentDidMount() {
-    this.dataCall()
-    this.performSearch()
-  }
+    this.dataCall();
+    this.performSearch();
+  };
 
+  //Function to call the cats, dogs and computers data by default.
   dataCall = () => {
     axios.all([requestCats, requestDogs, requestComputers]).then(axios.spread((...responses) => {
       this.setState({
@@ -40,10 +42,11 @@ export default class App extends Component {
         loading: false
       })
     })).catch(err => {
-      console.log('Error fetching and parsing data', err)
-    })
-  }
+      console.log('Error fetching and parsing data', err);
+    });
+  };
 
+  //Function to call the API data that match with the query.
   performSearch = (query = 'pc') => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
@@ -53,9 +56,9 @@ export default class App extends Component {
         })
       })
       .catch(error => {
-        console.log('Error fetching and parsing data', error)
-      })
-  }
+        console.log('Error fetching and parsing data', error);
+      });
+  };
 
   render() {
 
@@ -66,13 +69,13 @@ export default class App extends Component {
         ? <p>Loading...</p>
         : 
         <BrowserRouter>
-
+          <SearchForm submit={this.performSearch}/>
           <Switch>
-            <Route  path="/" render={ () => <SearchForm submit={this.performSearch} data={this.state}/> }/>
-            <Route  path="/:name/:topic" render={ () => <Photo data={this.state.photos}/> }/>
-            <Route  path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
-            <Route  path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
-            <Route  path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
+            <Route exact path="/" render={ () => <SearchForm submit={this.performSearch} data={this.state}/> }/>
+            <Route exact path="/:name/:topic" render={ () => <Photo data={this.state.photos}/> }/>
+            <Route exact path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
+            <Route exact path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
+            <Route exact path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
             <Route component={Error} />
           </Switch>
             
@@ -82,18 +85,3 @@ export default class App extends Component {
     );
   };
 };
-
-
-// <BrowserRouter>
-// <SearchForm submit={this.performSearch}/>
-
-// <Switch>
-//   <Route exact path="/" render={ () => <Photo data={this.state.photos}/> }/>
-//   <Route exact path="/:name/:topic" render={ () => <Photo data={this.state.photos}/> }/>
-//   <Route exact path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
-//   <Route exact path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
-//   <Route exact path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
-//   <Route component={Error} />
-// </Switch>
-  
-// </BrowserRouter>  
