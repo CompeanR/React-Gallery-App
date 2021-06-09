@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import apiKey from '../config.js'
 import axios from 'axios';
-import { BrowserRouter, Route,Switch, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 
 //App components'
-import Nav from './Nav';
-import NotFound from './NotFound';
+
 import Photo from './Photo';
+import Error from './Error'
 import SearchForm from './SearchForm'
 
 const key = apiKey;
@@ -21,7 +21,8 @@ export default class App extends Component {
       photos: [],
       cats: [],
       dogs: [],
-      computers: []
+      computers: [],
+      loading: true
     }
   }
 
@@ -35,7 +36,8 @@ export default class App extends Component {
       this.setState({
         cats: responses[0].data.photos.photo,
         dogs: responses[1].data.photos.photo,
-        computers: responses[2].data.photos.photo
+        computers: responses[2].data.photos.photo,
+        loading: false
       })
     })).catch(err => {
       console.log('Error fetching and parsing data', err)
@@ -46,7 +48,8 @@ export default class App extends Component {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
-          photos: response.data.photos.photo
+          photos: response.data.photos.photo,
+          loading: false
         })
       })
       .catch(error => {
@@ -54,48 +57,43 @@ export default class App extends Component {
       })
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.performSearch(this.query.value)
-    e.currentTarget.reset();
-  }
-
   render() {
 
     return (
-      <BrowserRouter>
-        <SearchForm data={this.state} onSearch={this.performSearch} handle={this.handleSubmit} query={this.query}/>
+      <div className="main-content">
+      {
+        (this.state.loading)
+        ? <p>Loading...</p>
+        : 
+        <BrowserRouter>
 
-        <Switch>
-          <Route path="/:name/:topic" component={SearchForm}/>
-          <Route path="/:name" render={ () => <Photo data={this.state.photos}/> }/>
-          <Route exact path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/>}/>
-          <Route exact path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/>}/>
-          <Route exact path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/>}/>
-        </Switch>
-          
-      </BrowserRouter>  
-    )
-  }
-}
+          <Switch>
+            <Route  path="/" render={ () => <SearchForm submit={this.performSearch} data={this.state}/> }/>
+            <Route  path="/:name/:topic" render={ () => <Photo data={this.state.photos}/> }/>
+            <Route  path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
+            <Route  path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
+            <Route  path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
+            <Route component={Error} />
+          </Switch>
+            
+        </BrowserRouter>  
+      }
+    </div>
+    );
+  };
+};
 
+
+// <BrowserRouter>
+// <SearchForm submit={this.performSearch}/>
 
 // <Switch>
-// <Route exact path="/" render={ () => <Photo data={this.state.photos} />}/>
-// <Route path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/>}/>
-// <Route path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/>}/>
-// <Route path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/>}/>
-// <Route path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/>}/>
+//   <Route exact path="/" render={ () => <Photo data={this.state.photos}/> }/>
+//   <Route exact path="/:name/:topic" render={ () => <Photo data={this.state.photos}/> }/>
+//   <Route exact path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
+//   <Route exact path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
+//   <Route exact path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
+//   <Route component={Error} />
 // </Switch>
-
-{/* <div className="container">
-<form className="search-form" onSubmit={this.handleSubmit}>
-  <input type="search" placeholder="Name" ref={(input) => this.query = input} placeholder="Search" required/>
-  <button type="submit" className="search-button">
-    <svg fill="#fff" height="24" viewBox="0 0 23 23" width="24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-      <path d="M0 0h24v24H0z" fill="none"/>
-    </svg>
-  </button>
-</form>
-</div> */}
+  
+// </BrowserRouter>  

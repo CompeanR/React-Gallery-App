@@ -1,9 +1,9 @@
 import React from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { NavLink }from 'react-router-dom';
 
-import SearchForm from './SearchForm'
 
-const Nav = ({ match }) => (
+
+const Nav = (props) => (
   <div>
     <nav className="main-nav">
       <ul>
@@ -13,7 +13,7 @@ const Nav = ({ match }) => (
       </ul>
     </nav>
     
-    {/* <Route exact path="/:name" render={ () => <Photo data={this.state.photos} />}/> */}
+
   </div>
 
   

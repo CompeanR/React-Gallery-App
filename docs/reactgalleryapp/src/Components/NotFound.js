@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route, NavLink, Redirect } from 'react-router-dom';
 
 const NotFound = () => (
     <li class="not-found">
