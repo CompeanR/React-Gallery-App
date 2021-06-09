@@ -71,7 +71,7 @@ export default class App extends Component {
         <BrowserRouter>
           <SearchForm submit={this.performSearch}/>
           <Switch>
-            <Route exact path="/" render={ () => <SearchForm submit={this.performSearch} data={this.state}/> }/>
+          <Route exact path="/" render={ () => <Photo data={this.state.photos}/> }/>
             <Route exact path="/:name/:topic" render={ () => <Photo data={this.state.photos}/> }/>
             <Route exact path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
             <Route exact path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
