@@ -11,7 +11,7 @@ You're sections headers will be used to reference location of destination.
 
 ## Description
 
-This is gallery made it with react.
+This is a gallery made it with react.
 
 #### Technologies
 
