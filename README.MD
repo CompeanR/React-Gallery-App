@@ -1,4 +1,4 @@
-# Static Nodejs and Express Site
+# React Gallery App
 
 ### Table of Contents
 You're sections headers will be used to reference location of destination.
