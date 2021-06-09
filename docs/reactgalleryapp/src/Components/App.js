@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import apiKey from '../config.js';
 import axios from 'axios';
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 //App components
 import Photo from './Photo';
@@ -22,7 +22,7 @@ export default class App extends Component {
       cats: [],
       dogs: [],
       computers: [],
-      loading: true
+      loading: true,
     };
   };
   
@@ -69,13 +69,15 @@ export default class App extends Component {
         ? <p>Loading...</p>
         : 
         <BrowserRouter>
+
           <SearchForm submit={this.performSearch}/>
+          
           <Switch>
           <Route exact path="/" render={ () => <Photo data={this.state.photos}/> }/>
-            <Route exact path="/:name/:topic" render={ () => <Photo data={this.state.photos}/> }/>
-            <Route exact path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
-            <Route exact path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
-            <Route exact path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
+            <Route path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
+            <Route path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
+            <Route path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
+            <Route path="/:name/:topic" render={ () => <Photo data={this.state.photos}/> }/>
             <Route component={Error} />
           </Switch>
             
