@@ -33,6 +33,7 @@ class App extends Component {
   //Function to mount the API request data.
   componentDidMount() {
     this.dataCall();
+    this.performSearch()
   };
 
 
@@ -69,7 +70,7 @@ class App extends Component {
     return (
       <div className="main-content">
       {
-        {/**If loading is true the photos doesn't appear */}
+        // If loading is true the photos doesn't display.
         (this.state.loading)
         ? <p>Loading...</p>
         : 
