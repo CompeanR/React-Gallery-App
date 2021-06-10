@@ -9,7 +9,7 @@ const SearchForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // props.submit(query.value);
+        props.submit(query.value);
         history.push(`/search/${query.value}`);
         e.currentTarget.reset();
     };

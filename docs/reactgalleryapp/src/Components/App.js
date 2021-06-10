@@ -75,11 +75,11 @@ export default class App extends Component {
           <SearchForm submit={this.performSearch}/>
           
           <Switch>
-          <Route exact path="/" render={ () => <Photo data={this.state.photos}/> }/>
-            <Route path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
-            <Route path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
-            <Route path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
-            <Route path="/search/:query" render={ () => <SearchRequest data={this.state.photos} onSearch={this.performSearch}/> }/>
+            <Route exact path="/" render={ () => <Photo data={this.state.photos}/> }/>
+            <Route exact path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
+            <Route exact path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
+            <Route exact path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
+            <Route path="/search/:query" render={ () => <SearchRequest data={this.state.photos} onSearch={query => this.performSearch(query)}/> }/>
             <Route component={Error} />
           </Switch>
             
