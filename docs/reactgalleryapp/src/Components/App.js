@@ -1,3 +1,5 @@
+/** React-Gallery-App */
+
 import React, { Component } from 'react';
 import apiKey from '../config.js';
 import axios from 'axios';
@@ -15,7 +17,8 @@ let requestCats = axios.get(`https://www.flickr.com/services/rest/?method=flickr
 let requestDogs = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=dogs&per_page=24&format=json&nojsoncallback=1`);
 let requestComputers = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=computers&per_page=24&format=json&nojsoncallback=1`);
 
-export default class App extends Component {
+class App extends Component {
+  
   constructor() {
     super();
     this.state = {
@@ -66,20 +69,29 @@ export default class App extends Component {
     return (
       <div className="main-content">
       {
+        {/**If loading is true the photos doesn't appear */}
         (this.state.loading)
         ? <p>Loading...</p>
         : 
         <BrowserRouter>
 
+          {/**Form submit */}
           <SearchForm submit={this.performSearch}/>
           
+          {/**Routes */}
           <Switch>
+
             <Route exact path="/" render={ () => <Photo data={this.state.photos}/> }/>
             <Route exact path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
             <Route exact path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
             <Route exact path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
+
+            {/**Search request Route */}
             <Route path="/search/:query" render={ () => <SearchRequest data={this.state} onSearch={query => this.performSearch(query)}/> }/>
+
+            {/**Error Route */}
             <Route component={Error} />
+
           </Switch>
             
         </BrowserRouter>  
@@ -88,3 +100,5 @@ export default class App extends Component {
     );
   };
 };
+
+export default App;

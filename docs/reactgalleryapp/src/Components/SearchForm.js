@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router'
 import Nav from './Nav';
 
-//Component to push to the history the search request.
+//Component to push the search request to history.
 class SearchForm extends Component {
 
     handleSubmit = (e) => {
@@ -30,4 +30,4 @@ class SearchForm extends Component {
     };
 }; 
 
-export default withRouter(SearchForm)
+export default withRouter(SearchForm);

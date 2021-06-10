@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router'
-import Photo from './Photo'
 import Render from './Render'
 
+//Component that maintain the query parameter updated.
 class SearchRequest extends Component {
 
     render() {
@@ -12,4 +12,4 @@ class SearchRequest extends Component {
     };
 };
 
-export default withRouter(SearchRequest)
+export default withRouter(SearchRequest);

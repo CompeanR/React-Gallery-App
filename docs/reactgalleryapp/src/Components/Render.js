@@ -4,6 +4,7 @@ import Photo from './Photo'
 
 //Component that display the data with the current query.
 class Render extends Component {
+
     componentDidMount() {
         this.props.onSearch(this.props.query)
     };
@@ -21,4 +22,4 @@ class Render extends Component {
     };
 };
 
-export default withRouter(Render)
+export default withRouter(Render);
