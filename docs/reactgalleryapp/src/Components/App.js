@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Photo from './Photo';
 import Error from './Error';
 import SearchForm from './SearchForm';
+import SearchRequest from './SearchRequest'
 
 //The api key and the API requests
 const key = apiKey;
@@ -31,6 +32,7 @@ export default class App extends Component {
     this.dataCall();
     this.performSearch();
   };
+
 
   //Function to call the cats, dogs and computers data by default.
   dataCall = () => {
@@ -77,7 +79,7 @@ export default class App extends Component {
             <Route path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
             <Route path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
             <Route path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
-            <Route path="/:name/:topic" render={ () => <Photo data={this.state.photos}/> }/>
+            <Route path="/search/:query" render={ () => <SearchRequest data={this.state.photos} onSearch={this.performSearch}/> }/>
             <Route component={Error} />
           </Switch>
             
