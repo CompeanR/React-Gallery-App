@@ -30,7 +30,6 @@ export default class App extends Component {
   //Function to mount the API request data.
   componentDidMount() {
     this.dataCall();
-    this.performSearch();
   };
 
 
@@ -79,7 +78,7 @@ export default class App extends Component {
             <Route exact path="/cats" render={ () => <Photo data={this.state.cats} results='cats'/> }/>
             <Route exact path="/dogs" render={ () => <Photo data={this.state.dogs} results='dogs'/> }/>
             <Route exact path="/computers" render={ () => <Photo data={this.state.computers} results='computers'/> }/>
-            <Route path="/search/:query" render={ () => <SearchRequest data={this.state.photos} onSearch={query => this.performSearch(query)}/> }/>
+            <Route path="/search/:query" render={ () => <SearchRequest data={this.state} onSearch={query => this.performSearch(query)}/> }/>
             <Route component={Error} />
           </Switch>
             
