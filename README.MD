@@ -36,6 +36,10 @@ This is a gallery made it with react.
 
     Start the project in http://localhost:3000/
 
+- key
+
+    To make the API calls you need to add your personal key, create a config.js file inside the src folder, create a const name apiKey with your key and then export them.
+
 ## Author Info
 
 - Twitter - [@JCompeann](https://twitter.com/JCompeann)
