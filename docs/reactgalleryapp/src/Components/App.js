@@ -13,6 +13,7 @@ import SearchRequest from './SearchRequest'
 
 //The api key and the API requests
 const key = apiKey;
+const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&tags=`
 let requestCats = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=cats&per_page=24&format=json&nojsoncallback=1`);
 let requestDogs = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=dogs&per_page=24&format=json&nojsoncallback=1`);
 let requestComputers = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=computers&per_page=24&format=json&nojsoncallback=1`);
@@ -53,7 +54,7 @@ class App extends Component {
 
   //Function to call the API data that match with the query.
   performSearch = (query = 'pc') => {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d319c0c494ad5f2bdc26170edb6b9a1c&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+    axios.get(`${url}${query}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
           photos: response.data.photos.photo,
@@ -64,6 +65,12 @@ class App extends Component {
         console.log('Error fetching and parsing data', error);
       });
   };
+
+  handleChange = () => {
+    this.setState ({
+      loading: true
+    })
+  }
 
   render() {
 
@@ -77,7 +84,7 @@ class App extends Component {
         <BrowserRouter>
 
           {/**Form submit */}
-          <SearchForm submit={this.performSearch}/>
+          <SearchForm submit={this.performSearch} change={this.handleChange}/>
           
           {/**Routes */}
           <Switch>
