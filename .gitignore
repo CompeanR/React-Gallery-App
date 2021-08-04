@@ -75,5 +75,3 @@ typings/
 # FuseBox cache
 .fusebox/
 
-# Config.js
-config.js
