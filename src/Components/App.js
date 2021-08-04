@@ -70,7 +70,7 @@ class App extends Component {
     this.setState ({
       loading: true
     })
-  }
+  };
 
   render() {
 

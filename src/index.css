@@ -1,13 +1,15 @@
 body {
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #3f4850;
+  background: #181818;
 }
 
 h2 {
   font-size: 2em;
   margin: 52px 0 40px;
   text-transform: capitalize;
+  color: #b3b3b3;
 }
 
 ul {
@@ -17,6 +19,7 @@ ul {
 
 a {
   text-decoration: none;
+  background-color: #404040;
 }
 
 .search-form {
@@ -52,10 +55,10 @@ input {
 
 .main-nav a {
   display: block;
-  background: #438bbd;
+  background: #404040;
   border-radius: 3px;
   padding: 5px;
-  color: #fff;
+  color: #ffffff;
 }
 
 .main-nav .active,
@@ -93,7 +96,11 @@ input {
   width: 100%;
 }
 
-@media only screen and (max-width: 767px)  {
+button.search-button {
+  background: #404040;
+}
+
+@media only screen and (max-width: 767px) {
   body {
     padding-top: 2em;
   }
@@ -103,7 +110,7 @@ input {
   }
 }
 
-@media only screen and (min-width: 768px)  {
+@media only screen and (min-width: 768px) {
   body {
     padding-top: 4em;
   }
@@ -117,7 +124,7 @@ input {
     display: flex;
     justify-content: center;
   }
-  
+
   .main-nav li {
     margin: 10px;
     width: 100px;
